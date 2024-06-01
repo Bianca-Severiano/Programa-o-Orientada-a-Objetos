@@ -1,0 +1,32 @@
+Create database Biblioteca;
+Use Biblioteca;
+
+Create table Aluno(
+	ra int(10) NOT NULL primary key,
+	nome varchar(50) NOT NULL,
+	email varchar(50) NOT NULL
+);
+
+Create table Exemplar(
+	codigo int(10) NOT NULL primary key,
+	nome varchar(50),
+	qtdPaginas int (10)
+);
+
+Create table Livro(
+	isbn char(13),
+	edicao int (10),
+	ExemplarCodigo int(10), FOREIGN KEY (ExemplarCodigo) REFERENCES Exemplar (codigo)
+);
+
+Create table Revista(
+	issn char(13),
+	ExemplarCodigo int(10), FOREIGN KEY (ExemplarCodigo) REFERENCES Exemplar (codigo)
+);
+
+Create table Aluguel(
+	data_retirada date NOT NULL,
+	data_devolucao date NOT NULL,
+	ExemplarCodigo int(10), FOREIGN KEY (ExemplarCodigo) REFERENCES Exemplar (codigo),
+	AlunoRa int(10), FOREIGN KEY (AlunoRa) REFERENCES Aluno (ra)
+);
